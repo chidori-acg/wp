@@ -132,13 +132,13 @@
             <img src="<?php echo get_bloginfo('template_directory').'/image/site_logo.png';?>" />
         </div>
         <div class="user">
-            <div class="user-avatar">
+            <a class="user-avatar" href="<?php echo site_url().'/member/' ?>">
                 <?php
                 global $current_user, $display_name, $user_email;
                 get_currentuserinfo();
                 echo get_avatar($current_user->user_email, 32);
                 ?>
-            </div>
+            </a>
             <ul class="user-opt">
                 <li><a href="<?php echo admin_url();?>">控制台</a></li>
             </ul>
