@@ -6642,3 +6642,58 @@ body {
 .rank_lv6 {
   background-color: #000000;
 }
+
+/*single style*/
+.cdi_single_container {
+  padding-top: 50px;
+  width: 100%;
+  margin: 0;
+}
+.cdi_single {
+  width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.cdi_single>.cdi_single-post {
+  width: 680px;
+}
+.cdi_single>.cdi_single-author {
+  width: 300px;
+}
+.cdi_single .cdi_single-author-avatar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.cdi_single-author-nickname {
+  text-align: center;
+}
+.cdi_single-author-rick {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.cdi_single-author-rick-num {
+  display: inline-block;
+  border-radius: 4px;
+  font-size: 12px;
+  padding: 3px 5px;
+}
+
+footer {
+  width: 100%;
+}
+.site-footer {
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+  padding: 15px 0;
+  border: 0;
+}
+

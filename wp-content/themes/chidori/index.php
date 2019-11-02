@@ -52,7 +52,7 @@ foreach($cats as $the_cat) {
 
         foreach($posts as $post) {
             ?>
-            <div class="post">
+            <a class="post" href="<?php echo get_permalink($post->ID) ?>">
                 <div class="post-cover" style="background-image:url('<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($post->ID))[0] ?>')">
                 </div>
                 <div class="post-title">
@@ -64,7 +64,7 @@ foreach($cats as $the_cat) {
                     }
                     ?>
                 </div>
-            </div>
+            </a>
             <?php
         }
 

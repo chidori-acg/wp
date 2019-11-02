@@ -12,49 +12,58 @@
 get_header();
 ?>
 
-	<section id="primary" class="content-area">
-		<main id="main" class="site-main">
+<div class="cdi_single_container">
+    <?php while (have_posts()) {
+        the_post();
+        global $post ?>
+        <div class="cdi_single">
+            <div class="cdi_single-post">
+                <div class="cdi_single-post-title">
+                    <?php echo $post->post_title; ?>
+                </div>
+                <div class="cdi_single-post-body">
+                    <?php echo $post->post_content; ?>
+                </div>
+            </div>
+            <div class="cdi_single-author">
+                <div class="cdi_single-author-avatar">
+                    <?php echo get_avatar($post->post_author, 32); ?>
+                </div>
+                <div class="cdi_single-author-nickname">
+                    <?php
+                    $author_info = get_userdata($post->post_author);
+                    echo $author_info->display_name;
+                    ?>
+                </div>
+                <div class="cdi_single-author-rick">
+                <?php
+                $rank_data = mycred_display_users_balance($post->post_author);
+                $rank_arr = [10, 20, 100, 500, 1000];
+                $rank_index = -1;
+                for($i=0; $i<5; $i++) {
+                    if ($rank_data < $rank_arr[$i]) {
+                        $rank_index = $i;
+                        break;
+                    }
+                }
+                ?>
+                    <div class="cdi_single-author-rick-num rank_lv<?php echo $rank_index; ?>">Lv<?php echo $rank_index+1; ?></div>
+                </div>
+            </div>
+        </div>
+    <?php }?>
 
-			<?php
+    <footer>
+        <div class="site-footer">
+            <div class="site-footer-left">
+                <div></div>
+            </div>
+            <div class="site-footer-right">
 
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				get_template_part( 'template-parts/content/content', 'single' );
-
-				if ( is_singular( 'attachment' ) ) {
-					// Parent post navigation.
-					the_post_navigation(
-						array(
-							/* translators: %s: parent post link */
-							'prev_text' => sprintf( __( '<span class="meta-nav">Published in</span><span class="post-title">%s</span>', 'twentynineteen' ), '%title' ),
-						)
-					);
-				} elseif ( is_singular( 'post' ) ) {
-					// Previous/next post navigation.
-					the_post_navigation(
-						array(
-							'next_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Next Post', 'twentynineteen' ) . '</span> ' .
-								'<span class="screen-reader-text">' . __( 'Next post:', 'twentynineteen' ) . '</span> <br/>' .
-								'<span class="post-title">%title</span>',
-							'prev_text' => '<span class="meta-nav" aria-hidden="true">' . __( 'Previous Post', 'twentynineteen' ) . '</span> ' .
-								'<span class="screen-reader-text">' . __( 'Previous post:', 'twentynineteen' ) . '</span> <br/>' .
-								'<span class="post-title">%title</span>',
-						)
-					);
-				}
-
-				// If comments are open or we have at least one comment, load up the comment template.
-				if ( comments_open() || get_comments_number() ) {
-					comments_template();
-				}
-
-			endwhile; // End of the loop.
-			?>
-
-		</main><!-- #main -->
-	</section><!-- #primary -->
+            </div>
+        </div>
+    </footer>
+</div>
 
 <?php
 get_footer();

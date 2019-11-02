@@ -383,3 +383,110 @@ add_filter('show_admin_bar', '__return_false');
 /**
  * ----------------------------------------------------------
  */
+
+/**
+ * 编辑器自定义字段
+ * ----------------------------------------------------------
+ */
+/* 链接 */
+add_action( 'add_meta_boxes', 'resource_url' );
+function resource_url() {
+    add_meta_box(
+        'resource_url',
+        '神秘链接',
+        'resource_url_meta_box',
+        'post',
+        'side',
+        'low'
+    );
+}
+
+function resource_url_meta_box($post) {
+    // 创建临时隐藏表单，为了安全
+    wp_nonce_field( 'resource_url_meta_box', 'resource_url_meta_box_nonce' );
+    // 获取之前存储的值
+    $value = get_post_meta( $post->ID, '_resource_url', true );
+    ?>
+    <label for="resource_url"></label>
+    <input type="text" id="resource_url" name="resource_url" value="<?php echo esc_attr( $value ); ?>" >
+    <?php
+}
+
+add_action( 'save_post', 'resource_url_save_meta_box' );
+function resource_url_save_meta_box($post_id)
+{
+    // 安全检查
+    // 检查是否发送了一次性隐藏表单内容（判断是否为第三者模拟提交）
+    if (!isset($_POST['resource_url_meta_box_nonce'])) {
+        return;
+    }
+    // 判断隐藏表单的值与之前是否相同
+    if (!wp_verify_nonce($_POST['resource_url_meta_box_nonce'], 'resource_url_meta_box')) {
+        return;
+    }
+    // 判断该用户是否有权限
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // 判断 Meta Box 是否为空
+    if (!isset($_POST['resource_url'])) {
+        return;
+    }
+
+    $resource_url = sanitize_text_field($_POST['resource_url']);
+    update_post_meta($post_id, '_resource_url', $resource_url);
+}
+
+/* 提取码 */
+add_action( 'add_meta_boxes', 'resource_code' );
+function resource_code() {
+    add_meta_box(
+        'resource_code',
+        '提取码',
+        'resource_code_meta_box',
+        'post',
+        'side',
+        'low'
+    );
+}
+
+function resource_code_meta_box($post) {
+    // 创建临时隐藏表单，为了安全
+    wp_nonce_field( 'resource_code_meta_box', 'resource_code_meta_box_nonce' );
+    // 获取之前存储的值
+    $value = get_post_meta( $post->ID, '_resource_code', true );
+    ?>
+    <label for="resource_code"></label>
+    <input type="text" id="resource_code" name="resource_code" value="<?php echo esc_attr( $value ); ?>" />
+    <?php
+}
+
+add_action( 'save_post', 'resource_code_save_meta_box' );
+function resource_code_save_meta_box($post_id)
+{
+    // 安全检查
+    // 检查是否发送了一次性隐藏表单内容（判断是否为第三者模拟提交）
+    if (!isset($_POST['resource_code_meta_box_nonce'])) {
+        return;
+    }
+    // 判断隐藏表单的值与之前是否相同
+    if (!wp_verify_nonce($_POST['resource_code_meta_box_nonce'], 'resource_code_meta_box')) {
+        return;
+    }
+    // 判断该用户是否有权限
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // 判断 Meta Box 是否为空
+    if (!isset($_POST['resource_code'])) {
+        return;
+    }
+
+    $resource_code = sanitize_text_field($_POST['resource_code']);
+    update_post_meta($post_id, '_resource_code', $resource_code);
+}
+/**
+ * ----------------------------------------------------------
+ */

@@ -111,7 +111,8 @@
     }
     .post {
         width: 160px;
-        margin: 0 10px;
+        margin: 0 10px;s
+        padding: 10px 0;
     }
     .post>.post-cover {
         width: 100%;
