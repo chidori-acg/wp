@@ -52,17 +52,6 @@ get_header();
             </div>
         </div>
     <?php }?>
-
-    <footer>
-        <div class="site-footer">
-            <div class="site-footer-left">
-                <div></div>
-            </div>
-            <div class="site-footer-right">
-
-            </div>
-        </div>
-    </footer>
 </div>
 
 <?php
