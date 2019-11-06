@@ -369,6 +369,9 @@ add_action('template_redirect', 'templateRedirect');
 function wp_add_scripts() {
     // jquery
     wp_enqueue_script('jquery');
+
+    // less 压缩样式
+    wp_enqueue_style('less_css', get_bloginfo('template_directory').'/styles.min.css');
 }
 add_action('wp_enqueue_scripts', 'wp_add_scripts');
 /**

@@ -19,65 +19,6 @@
 	<?php wp_head(); ?>
 </head>
 <style>
-    header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        z-index: 999;
-        background-color: hsla(0, 0%, 100%, .4);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-    }
-    .header {
-        width: 1000px;
-        height: 42px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .site-logo {
-        height: 30px;
-    }
-    .site-logo>img {
-        height: 100%;
-    }
-    .user {
-        display: inline-flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .user>.user-avatar {
-        width: 30px;
-        height: 30px;
-    }
-    .user>.user-avatar>img {
-        width: 100%;
-        height: 100%;
-    }
-
-    .user-opt {
-        margin: 0;
-        padding: 0 0 0 10px;
-        display: flex;
-        flex-direction: row;
-        list-style-type: none;
-    }
-    .user-opt li {
-        display: inline-flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .user-opt li a {
-        color: #111;
-        font-size: 14px;
-    }
 
     .home-header {
         width: 100%;
@@ -128,19 +69,19 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <header>
-    <div class="header">
-        <div class="site-logo">
+    <div class="cdi-header">
+        <div class="cdi-header-logo">
             <img src="<?php echo get_bloginfo('template_directory').'/image/site_logo.png';?>" />
         </div>
-        <div class="user">
-            <a class="user-avatar" href="<?php echo site_url().'/member/' ?>">
+        <div class="cdi-header-user">
+            <a class="cdi-header-user-avatar" href="<?php echo site_url().'/member/' ?>">
                 <?php
                 global $current_user, $display_name, $user_email;
                 get_currentuserinfo();
                 echo get_avatar($current_user->user_email, 32);
                 ?>
             </a>
-            <ul class="user-opt">
+            <ul class="cdi-header-user-opt">
                 <li><a href="<?php echo admin_url();?>">控制台</a></li>
             </ul>
         </div>

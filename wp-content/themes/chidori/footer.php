@@ -14,11 +14,11 @@
 ?>
 
 <footer>
-    <div class="site-footer">
-        <div class="site-footer-logo">
+    <div class="cdi-footer">
+        <div class="cdi-footer-logo">
             <img src="<?php echo get_bloginfo('template_directory').'/image/site_logo.png'; ?>" />
         </div>
-        <div class="site-footer-intro">
+        <div class="cdi-footer-intro">
             <p>本站点最终所有权归属双葉委员会</p>
             <p>本站仅做ACG分享，不提供任何资源。</p>
         </div>
