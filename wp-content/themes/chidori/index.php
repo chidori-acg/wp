@@ -22,9 +22,7 @@ if(!is_user_logged_in()) {
 get_header();
 ?>
 
-<div class="home-header" style="background-image:url('<?php echo get_bloginfo('template_directory').'/image/home_header.jpg';?>')">
-</div>
-<div class="container">
+<div class="cdi-container">
 
 <?php
 
@@ -44,18 +42,22 @@ foreach($cats as $the_cat) {
     if(!empty($posts)) {
         ?>
 
-        <div class="section">
-            <div class="section-title"><?php echo $the_cat->name; ?></div>
-            <div class="section-row">
+        <div class="cdi-home-classify">
+            <div class="cdi-home-classify-title"><?php echo $the_cat->name; ?></div>
+            <div class="cdi-home-classify-row">
 
         <?php
 
         foreach($posts as $post) {
             ?>
-            <a class="post" href="<?php echo get_permalink($post->ID) ?>">
-                <div class="post-cover" style="background-image:url('<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($post->ID))[0] ?>')">
+            <a class="cdi-post" href="<?php echo get_permalink($post->ID) ?>">
+                <div class="cdi-post-cover" style="background-image:url('<?php echo wp_get_attachment_image_src(get_post_thumbnail_id($post->ID))[0] ?>')">
                 </div>
-                <div class="post-title">
+                <div class="cdi-post-info">
+                    <span class="cdi-post-info-time"><?php echo substr($post->post_date, 0, 10); ?></span>
+                    <span class="cdi-post-info-author"><?php echo get_userdata($post->post_author)->display_name; ?></span>
+                </div>
+                <div class="cdi-post-title">
                     <?php
                     if(mb_strlen($post->post_title, 'UTF8') > 13) {
                         echo mb_substr($post->post_title, 0, 13, 'UTF8').'...';
@@ -69,8 +71,8 @@ foreach($cats as $the_cat) {
         }
 
         ?>
-            </div>
-        </div>
+            </div><!--cdi-home-classify-row-->
+        </div><!--cdi-home-classify-->
         <?php
     }
 }
