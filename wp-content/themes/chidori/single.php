@@ -33,6 +33,23 @@ get_header();
                         echo get_post_meta($post->ID,'_resource_url',true).'-'.get_post_meta($post->ID,'_resource_code',true);
                     ?>
                 </div>
+                <script>
+                    $(".cdi-single-post-nothas-btn").click(function() {
+                        var ajaxurl = '<?php echo admin_url('admin-ajax.php')?>';
+                        var data = {
+                            action: "single_buy",
+                            single_id: "<?php echo $post->ID; ?>"
+                        }
+                        $.ajax({
+                            url: ajaxurl,
+                            method: 'post',
+                            data: data,
+                            success: function(res) {
+                                console.log(res);
+                            }
+                        })
+                    });
+                </script>
             </div>
             <div class="cdi-single-author">
                 <div class="cdi-single-author-avatar">

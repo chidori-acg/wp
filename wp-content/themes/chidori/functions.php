@@ -493,3 +493,21 @@ function resource_code_save_meta_box($post_id)
 /**
  * ----------------------------------------------------------
  */
+
+/**
+ * ajax
+ * ----------------------------------------------------------
+ */
+add_action("wp_ajax_single_buy", "ajax_single_buy");
+
+function ajax_single_buy() {
+    global $current_user;
+    get_currentuserinfo();
+    $single_id = $_POST['single_id'];
+    header( "Content-Type: application/json" );
+    echo json_encode([
+            "user_id" => $current_user->ID,
+            "single_id" => $single_id
+    ]);
+    exit;
+}
