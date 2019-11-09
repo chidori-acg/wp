@@ -28,4 +28,30 @@
 <?php wp_footer(); ?>
 
 </body>
+<script>
+    jQuery(document).ready(function($) {
+        $(".cdi-single-post-nothas-btn").click(function() {
+            var ajaxurl = '<?php echo admin_url('admin-ajax.php')?>';
+            var data = {
+                action: "single_buy",
+                post_id: "<?php echo $post->ID; ?>"
+            }
+            $.ajax({
+                url: ajaxurl,
+                method: 'post',
+                data: data,
+                success: function(res) {
+                    console.log(res);
+                    if (!res.encode) {
+                        $(".cdi-single-post-nothas").after('<div class="cdi-single-post-car">'
+                            + res.message.resource_url
+                            + '-'
+                            + res.message.resource_code + '</div>').remove();
+                    }
+                }
+            })
+        });
+    });
+
+</script>
 </html>

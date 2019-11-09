@@ -24,32 +24,29 @@ get_header();
                 <div class="cdi-single-post-body">
                     <?php echo $post->post_content; ?>
                 </div>
-                <div class="cdi-single-post-nothas">
-                    <div class="cdi-single-post-nothas-tips">CHIDORI 小贴士：供献奉納可能会获得神明的报答。</div>
-                    <div class="cdi-single-post-nothas-btn">献上 3 奉納</div>
-                </div>
-                <div class="cdi-single-post-car">
-                    <?php
-                        echo get_post_meta($post->ID,'_resource_url',true).'-'.get_post_meta($post->ID,'_resource_code',true);
-                    ?>
-                </div>
-                <script>
-                    $(".cdi-single-post-nothas-btn").click(function() {
-                        var ajaxurl = '<?php echo admin_url('admin-ajax.php')?>';
-                        var data = {
-                            action: "single_buy",
-                            single_id: "<?php echo $post->ID; ?>"
-                        }
-                        $.ajax({
-                            url: ajaxurl,
-                            method: 'post',
-                            data: data,
-                            success: function(res) {
-                                console.log(res);
-                            }
-                        })
-                    });
-                </script>
+                <?php
+                if (mycred_post_is_for_sale($post)) {
+                    $user_id = get_current_user_id();
+                    if (mycred_user_paid_for_content($user_id, $post->ID)) {
+                        ?>
+                        <div class="cdi-single-post-car">
+                            <?php
+                            echo get_post_meta($post->ID,'_resource_url',true).'-'.get_post_meta($post->ID,'_resource_code',true);
+                            ?>
+                        </div>
+                        <?php
+                    } else {
+                        ?>
+                        <div class="cdi-single-post-nothas">
+                            <div class="cdi-single-post-nothas-tips">CHIDORI 小贴士：供献奉納可能会获得神明的报答。</div>
+                            <div class="cdi-single-post-nothas-btn">献上 <?php echo get_post_meta($post->ID,'_chidori_coin',true); ?> 奉納</div>
+                        </div>
+                        <?php
+                    }
+                }
+                ?>
+
+
             </div>
             <div class="cdi-single-author">
                 <div class="cdi-single-author-avatar">
