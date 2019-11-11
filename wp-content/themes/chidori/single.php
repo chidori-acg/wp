@@ -25,7 +25,8 @@ get_header();
                     <?php echo $post->post_content; ?>
                 </div>
                 <?php
-                if (mycred_post_is_for_sale($post)) {
+                $post_coin = get_post_meta($post->ID,'_chidori_coin',true);
+                if (mycred_post_is_for_sale($post) && $post_coin) {
                     $user_id = get_current_user_id();
                     if (mycred_user_paid_for_content($user_id, $post->ID)) {
                         ?>
@@ -39,7 +40,7 @@ get_header();
                         ?>
                         <div class="cdi-single-post-nothas">
                             <div class="cdi-single-post-nothas-tips">CHIDORI 小贴士：供献奉納可能会获得神明的报答。</div>
-                            <div class="cdi-single-post-nothas-btn">献上 <?php echo get_post_meta($post->ID,'_chidori_coin',true); ?> 奉納</div>
+                            <div class="cdi-single-post-nothas-btn">献上 <?php echo $post_coin; ?> 奉納</div>
                         </div>
                         <?php
                     }

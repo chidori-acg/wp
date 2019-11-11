@@ -308,3 +308,30 @@ function chidori_post_price($price, $post_id) {
 }
 
 add_filter("mycred_get_content_price", "chidori_post_price", 10, 2);
+
+/**
+ * -----------------------------------------------------------
+ */
+
+/**
+ * comments list get template
+ * -------------------------------------------------------------
+ */
+function get_comments_list($comment, $args, $depth) {
+
+    ?>
+    <li class="cdi-comment">
+        <div class="cdi-comment-author">
+            <div class="cdi-comment-author-avatar"></div>
+            <div class="cdi-comment-author-info">
+                <div class="cdi-comment-author-nickname"><div class="cdi-comment-author-rank"></div></div>
+                <div class="cdi-comment-author-time"></div>
+            </div>
+        </div>
+        <div class="cdi-comment-body"></div>
+    </li>
+<?php
+}
+/**
+ * --------------------------------------------------------------
+ */
