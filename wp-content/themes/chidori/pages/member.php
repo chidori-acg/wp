@@ -9,8 +9,8 @@ get_header();
         <div class="member-card-left">
             <div class="member-avatar">
                 <?php
-                global $current_user, $display_name, $user_email;
-                get_currentuserinfo();
+                global $current_user;
+                wp_get_current_user();
                 echo get_avatar($current_user->user_email);
                 ?>
             </div>

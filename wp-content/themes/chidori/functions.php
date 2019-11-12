@@ -320,15 +320,16 @@ add_filter("mycred_get_content_price", "chidori_post_price", 10, 2);
 function get_comments_list($comment, $args, $depth) {
 
     ?>
-    <li class="cdi-comment">
+    <li class="cdi-comment" data-id="<?php echo $comment->comment_ID; ?>">
         <div class="cdi-comment-author">
-            <div class="cdi-comment-author-avatar"></div>
+            <div class="cdi-comment-author-avatar"><?php echo get_avatar($comment->user_id, 32); ?></div>
             <div class="cdi-comment-author-info">
-                <div class="cdi-comment-author-nickname"><div class="cdi-comment-author-rank"></div></div>
-                <div class="cdi-comment-author-time"></div>
+                <div class="cdi-comment-author-nickname"><?php echo $comment->comment_author; ?><div class="cdi-comment-author-rank"></div></div>
+                <div class="cdi-comment-author-time"><?php echo $comment->comment_date; ?></div>
             </div>
+            <div class="cdi-comment-author-reply-btn">回复</div>
         </div>
-        <div class="cdi-comment-body"></div>
+        <div class="cdi-comment-body"><?php echo $comment->comment_content; ?></div>
     </li>
 <?php
 }

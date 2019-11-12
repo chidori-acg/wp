@@ -41,5 +41,19 @@ if (have_comments()) {
 }
 
 ?>
+    <div class="cdi-comments-post">
+        <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post">
+            <textarea name="comment" placeholder="说点什么吧..."></textarea>
+            <?php
+            global $current_user;
+            wp_get_current_user();
+            ?>
+            <input type="hidden" name="email" value="<?php echo $current_user->user_email; ?>" />
+            <input type="hidden" name="author" value="<?php echo $current_user->display_name; ?>" />
+            <?php comment_id_fields(); ?>
+            <div class="cdi-comments-post-btn">提交</div>
+        </form>
+    </div>
 </div>
+
 

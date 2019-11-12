@@ -75,8 +75,11 @@ get_header();
                 </div>
             </div>
         </div>
-    <?php }?>
+    <?php }
+    comments_template();
+    ?>
 </div>
 
 <?php
+
 get_footer();

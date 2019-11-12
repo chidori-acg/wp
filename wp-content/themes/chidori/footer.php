@@ -30,6 +30,8 @@
 </body>
 <script>
     jQuery(document).ready(function($) {
+
+        // 购买资源
         $(".cdi-single-post-nothas-btn").click(function() {
             var ajaxurl = '<?php echo admin_url('admin-ajax.php')?>';
             var data = {
@@ -41,7 +43,6 @@
                 method: 'post',
                 data: data,
                 success: function(res) {
-                    console.log(res);
                     if (!res.encode) {
                         $(".cdi-single-post-nothas").after('<div class="cdi-single-post-car">'
                             + res.message.resource_url
@@ -50,6 +51,25 @@
                     }
                 }
             })
+        });
+
+        // 提交评论
+        $(".cdi-comments-post-btn").click(function() {
+            if ($(this).siblings("textarea").val()) {
+                $(this).parents("form").submit();
+            }
+        });
+
+        // 显示嵌套评论回复框
+        $(".cdi-comment-author-reply-btn").click(function() {
+            var _comment_dom = $(this).parents(".cdi-comment");
+            var _comment_id = _comment_dom.attr("data-id");
+            var _form_dom_html = '<?php
+    echo '<div class="cdi-comments-post">'
+        .'<form action="'.get_option('siteurl').'/wp-comments-post.php" method="post">'
+        .'</form>'
+        .'</div>';
+?>'
         });
     });
 
