@@ -92,6 +92,13 @@ function wp_add_scripts() {
     wp_enqueue_style('less_css', get_bloginfo('template_directory').'/styles.min.css');
 }
 add_action('wp_enqueue_scripts', 'wp_add_scripts');
+
+//function wp_add_admin_scripts() {
+//    if (get_current_screen()->id == 'post') {
+//        wp_enqueue_script('remove_meta_boxes', get_bloginfo('template_directory').'/js/remove_meta_boxes.js', array(), '1.0.0', true);
+//    }
+//}
+//add_action( 'admin_enqueue_scripts', 'wp_add_admin_scripts' );
 /**
  * ----------------------------------------------------------
  */
@@ -104,6 +111,11 @@ add_filter('show_admin_bar', '__return_false');
 /**
  * ----------------------------------------------------------
  */
+
+/**
+ * 开启特色图片
+ */
+add_theme_support('post-thumbnails');
 
 /**
  * 编辑器自定义字段
@@ -318,7 +330,6 @@ add_filter("mycred_get_content_price", "chidori_post_price", 10, 2);
  * -------------------------------------------------------------
  */
 function get_comments_list($comment, $args, $depth) {
-
     ?>
     <li class="cdi-comment" data-id="<?php echo $comment->comment_ID; ?>">
         <div class="cdi-comment-author">
@@ -327,7 +338,9 @@ function get_comments_list($comment, $args, $depth) {
                 <div class="cdi-comment-author-nickname"><?php echo $comment->comment_author; ?><div class="cdi-comment-author-rank"></div></div>
                 <div class="cdi-comment-author-time"><?php echo $comment->comment_date; ?></div>
             </div>
+        <?php if ($depth <= $args['max_depth']){ ?>
             <div class="cdi-comment-author-reply-btn">回复</div>
+        <?php } ?>
         </div>
         <div class="cdi-comment-body"><?php echo $comment->comment_content; ?></div>
     </li>

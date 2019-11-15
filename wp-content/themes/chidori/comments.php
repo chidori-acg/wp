@@ -51,7 +51,10 @@ if (have_comments()) {
             <input type="hidden" name="email" value="<?php echo $current_user->user_email; ?>" />
             <input type="hidden" name="author" value="<?php echo $current_user->display_name; ?>" />
             <?php comment_id_fields(); ?>
-            <div class="cdi-comments-post-btn">提交</div>
+            <div class="cdi-comments-post-btn">
+                <div class="cdi-comments-post-btn-submit">提交</div>
+                <div class="cdi-comments-post-btn-cancel">取消</div>
+            </div>
         </form>
     </div>
 </div>

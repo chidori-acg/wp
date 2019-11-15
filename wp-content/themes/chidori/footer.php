@@ -64,12 +64,10 @@
         $(".cdi-comment-author-reply-btn").click(function() {
             var _comment_dom = $(this).parents(".cdi-comment");
             var _comment_id = _comment_dom.attr("data-id");
-            var _form_dom_html = '<?php
-    echo '<div class="cdi-comments-post">'
-        .'<form action="'.get_option('siteurl').'/wp-comments-post.php" method="post">'
-        .'</form>'
-        .'</div>';
-?>'
+            var _comment_form = $(".cdi-comments-post");
+            _comment_form.find("#comment_parent").val(_comment_id);
+            _comment_dom.after(_comment_form);
+            $(this).hide();
         });
     });
 
