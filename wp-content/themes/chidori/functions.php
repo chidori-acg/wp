@@ -349,3 +349,15 @@ function get_comments_list($comment, $args, $depth) {
 /**
  * --------------------------------------------------------------
  */
+
+/**
+ * rest api 文章增加特色图片 url
+ */
+add_action('rest_api_init', function() {
+    register_rest_field('post', 'featured_url', array(
+            'get_callback' => function($post) {
+                return wp_get_attachment_image_src(get_post_thumbnail_id($post->ID))[0];
+            }
+    ));
+});
+
