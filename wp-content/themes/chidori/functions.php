@@ -361,3 +361,51 @@ add_action('rest_api_init', function() {
     ));
 });
 
+/**
+ * rest api home
+ */
+
+function chidori_rest_home_posts() {
+
+    $home_posts = [];
+    $cats = get_categories([
+        'hide_empty' => 0
+    ]);
+
+    foreach($cats as $the_cat) {
+        $posts = get_posts([
+            'category' => $the_cat->cat_ID,
+            'numberposts' => 5,
+        ]);
+        $cat_posts = [];
+        if(!empty($posts)) {
+            foreach($posts as $post) {
+                $cat_posts[] = [
+                        'ID' => $post->ID,
+                    'post_link' => get_permalink($post->ID),
+                    'post_thumb' => wp_get_attachment_image_src(get_post_thumbnail_id($post->ID))[0],
+                    'post_date' => $post->post_date,
+                    'post_title' => $post->post_title,
+                    'post_user' => get_userdata($post->post_author)->display_name
+                ];
+            }
+        }
+        $home_posts[] = [
+                'ID' => $the_cat->cat_ID,
+            'name' => $the_cat->name,
+            'posts' => $cat_posts
+        ];
+    }
+    return $home_posts;
+}
+
+function chidori_rest_register_route() {
+    register_rest_route( 'chidori/v1', 'home_posts', [
+            'methods' => 'GET',
+        'callback' => 'chidori_rest_home_posts'
+    ]);
+}
+
+
+add_action( 'rest_api_init', 'chidori_rest_register_route');
+

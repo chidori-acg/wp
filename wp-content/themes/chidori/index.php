@@ -26,14 +26,10 @@ get_header();
 
 <?php
 
-global $cat;
 $cats = get_categories([
-    'child_of' => $cat,
-    'parent' => $cat,
     'hide_empty' => 0
 ]);
 
-$c = get_category($cat);
 foreach($cats as $the_cat) {
     $posts = get_posts([
         'category' => $the_cat->cat_ID,
